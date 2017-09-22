@@ -16,6 +16,11 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.containerHeader}>
+          <View style={styles.header}>
+          
+          </View>
+        </View>
         <Text> Estou no profile </Text>
       </View>
     );
@@ -23,5 +28,20 @@ export default class Profile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex:1
+  },
+  containerHeader: {
+
+  },
+  header: {
+
+  },
+  containerHeadProfile: {
+
+  },
+  imagemProfile: {
+
+  },
 
 })

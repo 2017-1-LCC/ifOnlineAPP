@@ -22,8 +22,8 @@ export default class LoginForm extends React.Component {
     if(!this.state.username || !this.state.password || !this.state.name || !this.state.email) return;
     
     this.setState({isLoading:true});
-
-    fetch('https://ifonline.herokuapp.com/user',{
+  //https://ifonline.herokuapp.com
+    fetch('http://darkSide:3002/user',{
       method:'POST',
       headers:{
         'Accept':'application/json',
@@ -32,30 +32,17 @@ export default class LoginForm extends React.Component {
       body:JSON.stringify({
         username: this.state.username,
         password: this.state.password,
-        typeUser: 'STUDENT'
+        typeUser: 'STUDENT',
+        name:this.state.name,
+        birthDate:this.state.birthDate,
+        user:null
       })
     })
     .then(response => response.json()) 
     .then(user => {
-      fetch('https://ifonline.herokuapp.com/student',{
-        method:'POST',
-        headers:{
-          'Accept':'application/json',
-          'Content-Type':'application/json',
-        },
-        body:JSON.stringify({
-          name: this.state.name,
-          birthDate: this.state.birthDate,
-          email:this.state.email, 
-          user:user._id
-        })
-      })
-      .then(response => response.json())
-      .then(student => {
         this.setState({isLoading:false});
-        Alert.alert("Usuário cadastrado com sucesso!");
-        Actions.Login();
-      })
+        Alert.alert("Usuário "+user.username+" cadastrado com sucesso!");
+        Actions.Login()
     }) 
     .catch(error => console.log("ERROR"+error))
   }
